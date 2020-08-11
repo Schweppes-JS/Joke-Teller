@@ -7,6 +7,14 @@ button.onclick = function() {
     getJoke(apiUrl, 'GET', implementationJoke);
 };
 
+// Enabled or Disabled button
+function toggleButton () {
+    button.disabled = !button.disabled;
+}
+
+// Enabled button after speech
+audioElement.addEventListener('ended', toggleButton);
+
 // Get joke from Joke API
 let joke = '';
 function getJoke (url, method, functionName) {
@@ -31,6 +39,9 @@ function implementationJoke(data) {
         joke = data.joke;
     }
     tellJoke(joke);
+
+    // Disabled button before speech
+    toggleButton();
 };
 
 // Send Joke to VoiceRSS API
